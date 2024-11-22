@@ -7,6 +7,7 @@
 #define GPIO_PIN                15
 #define PIXEL_FORMAT      "YUYV"
 #define  FPS                         60  
+#define CAM_NAME           "/dev/video0"
 
 
 /* 
@@ -43,7 +44,7 @@ BOOST_AUTO_TEST_CASE(TestCamConfiguration) {
     */
 
     // Camera configuration testing
-    BOOST_CHECK_NO_THROW(cam_control.configureCameraExternalTrigger(GPIO_PIN, PIXEL_FORMAT, FPS) ); 
+    BOOST_CHECK_NO_THROW(cam_control.configureCameraExternalTrigger(CAM_NAME, GPIO_PIN, PIXEL_FORMAT, FPS) ); 
 
 }
 

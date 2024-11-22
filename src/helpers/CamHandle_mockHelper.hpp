@@ -1,16 +1,34 @@
 #ifndef CAMHANDLE_MOCKHELPER_HPP
 #define CAMHANDLE_MOCKHELPER_HPP
-
 #include <iostream>
+
+#define okay(message, ...)                  printf("[+] " message "\n", ##__VA_ARGS__)
+#define error(message, ...)                  printf("[-] " message "\n", ##__VA_ARGS__)
+#define info(message, ...)                    printf("[*] " message "\n", ##__VA_ARGS__)
+
+#define MOCK_HANDLE                     5
+#define DEV_NAME                              "/dev/video0"
 
 class MockCamHandle {
     public: 
-        int open(char *device_name) {
-            if(device_name != "/dev/vide0") {
-                return 1; 
+        void open(char *device_name) {
+            if(device_name != DEV_NAME) {
+                return; 
             }
-            std::cout << "Camera opened" << std::endl; 
+            okay("Camera opened, handle : %d", MOCK_HANDLE); 
         }
+
+        void close(char *device_name) {
+            if(device_name != DEV_NAME) {
+                error("Invalid device name : %s", device_name); 
+                return; 
+            }
+            okay("Camera closed",); 
+            return; 
+        }
+
+
 }
 
-#endif
+#endif // CAMHANDLE_MOCKHELPER_HPP 
+
