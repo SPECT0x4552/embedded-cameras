@@ -5,20 +5,19 @@
 
 class CamControl {
     public:    
-        CameraControl(CamHandle_Helper& camHandle_helper) : camHandle_helper(camHandle_helper) {}
+        CamControl(MockCamHandle& camHandle_helper) : camHandle_helper(camHandle_helper) {}
 
-        void configureCameraExternalTrigger(char *cam_name, int gpio_pin, char *pixel_fmt, int fps) {
-            camHandle_helper.open(cam_name); 
-            camHandle_helper.configureTriggerPin(gpio_pin, true); 
-            camHandle_helper.setPinValue(gpio_pin, false); 
-
+        void configureCameraExternalTrigger(char *cam_name, int gpio_pin, int gpio_state, char *pixel_fmt, int fps) {
+            camHandle_helper.configureTriggerPin(gpio_pin, 3); 
+            camHandle_helper.setPinValue(gpio_pin, 0); 
             camHandle_helper.setPixelFormat(pixel_fmt); 
             camHandle_helper.setFramesPerSec(fps); 
         }
 
 
     private: 
-        CamHandle_Helper& camHandle_helper; 
-}
+        MockCamHandle& camHandle_helper; 
+}; 
 
 #endif
+

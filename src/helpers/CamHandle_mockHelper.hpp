@@ -23,12 +23,47 @@ class MockCamHandle {
                 error("Invalid device name : %s", device_name); 
                 return; 
             }
-            okay("Camera closed",); 
+            okay("Camera closed"); 
             return; 
         }
 
+        void configureTriggerPin(int pin, int mode) {
+            if(pin != 17 || mode != 3) {
+                error("Invalid pin or invalid pin mode");  
+                return; 
+            }
+            okay("External trigger pin configured : %d", pin); 
+            okay("External trigger pin mode configured to INPUT : %d", mode); 
+        }
 
-}
+        void setPinValue(int pin, int mode) {
+            if(pin != 17 || mode < 0 || mode > 1) {
+                error("Invalid parameters"); 
+                return; 
+            }
+
+            okay("PIN set to state : %d (0-LOW, 1-HIGH)", mode); 
+        }
+
+        void setPixelFormat(char *format) {
+            if(format != "YUYV") {
+                error("Expected pixel format YUYV, got %s", format);
+                return;  
+            }
+            okay("Pixel format set to %s", format); 
+        }
+
+        void setFramesPerSec(int count) {
+            if(count % 30 || count <= 0 || count > 60) {
+                error("Invalid FPS argument : %d", count); 
+                info("Accepting multiples of 30"); 
+                return; 
+            }
+            okay("FPS set to : %d", count); 
+        }
+
+
+}; 
 
 #endif // CAMHANDLE_MOCKHELPER_HPP 
 
