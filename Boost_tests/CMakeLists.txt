@@ -8,6 +8,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 message("Boost library : ${Boost_LIBRARY_DIRS}, include : ${Boost_INCLUDE_DIRS}")
 
 add_executable (TriggerAVT_Boost_tests_run 
+    ${TriggerAVT_tests_src}/CamConfig_tests.cpp
     ${TriggerAVT_tests_src}/Camera_tests.cpp
     ${TriggerAVT_tests_src}/Error_tests.cpp
     ${TriggerAVT_tests_src}/Integration_tests.cpp

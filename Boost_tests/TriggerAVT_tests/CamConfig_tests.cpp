@@ -1,50 +1,37 @@
 #define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MAIN
 #define BOOST_TEST_MODULE Camera configuration tests
+#include <boost/test/unit_test.hpp>
 
 #include "CamControl_mockHelper.hpp"
+#include "CamHandle_mockHelper.hpp"
 
 
-#define GPIO_PIN                15
-#define PIXEL_FORMAT      "YUYV"
-#define  FPS                         60  
+struct CameraControlFixture {
+    MockCamHandle camHandle_helper; 
+    CamControl cameraControl; 
 
-
-/* 
-    Test fixture for camera control
-*/
-struct CamControlFixture {
-    CamControl_mockHelper cam_control; 
-
-    CamControlFixture() : cam_control(cam_handle) {
-        cam_handle.open(); 
+    CameraControlFixture() : cameraControl(camHandle_helper) {
+        camHandle_helper.open("/dev/video0"); 
     }
 
-    ~CamControlFixture() {
-        cam_handle.close(); 
+    ~CameraControlFixture() {
+        camHandle_helper.close("/dev/video0");  
     }
-
 }; 
 
-/* 
-    TEST SUITE START
-*/
-BOOST_FIXTURE_TEST_SUITE(CamControlTestSuite, CamControlFixture)
+// TEST SUITE START
 
-BOOST_AUTO_TEST_CASE(TestCamConfiguration) {
-    /* 
-        Hard-coded dummy data. Fine for writing test cases. Refactored after
-    */
-    int gpio_pin = GPIO_PIN; 
-    char *pixel_format = PIXEL_FORMAT; 
-    int fps = FPS; 
+BOOST_FIXTURE_TEST_SUITE(CamControlTestSuite, CameraControlFixture)
 
-    /* 
-        Behavior verifications START
-    */
+BOOST_AUTO_TEST_CASE(ConfigureExternalTriggerMode) {
+    int gpio = 17; 
+    char *pixel_fmt = "YUYV"; 
+    int fps = 60; 
 
-    // Camera configuration testing
-    BOOST_CHECK_NO_THROW(cam_control.configureCameraExternalTrigger(GPIO_PIN, PIXEL_FORMAT, FPS) ); 
-
+    BOOST_REQUIRE_NO_THROW(cameraControl.configureCameraExternalTrigger("/dev/video0", gpio, 1, pixel_fmt, fps)); 
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+
+
