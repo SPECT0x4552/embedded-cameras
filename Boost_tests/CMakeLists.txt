@@ -14,4 +14,5 @@ add_executable (TriggerAVT_Boost_tests_run
     ${TriggerAVT_tests_src}/TriggerSignal_tests.cpp
 )
 
+target_include_directories(TriggerAVT_Boost_tests_run PUBLIC ${CMAKE_SOURCE_DIR}/src/helpers)
 target_link_libraries(TriggerAVT_Boost_tests_run ${Boost_LIBRARIES})

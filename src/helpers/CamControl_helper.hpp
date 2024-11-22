@@ -1,0 +1,4 @@
+#ifndef CAMCONTROL_HELPER_HPP
+#define CAMCONTROL_HELPER_HPP
+
+#endif
