@@ -5,6 +5,8 @@ project(camera_tests LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 
+add_subdirectory(Boost_tests)
+
 add_executable(Webcam ${CMAKE_SOURCE_DIR}/Webcam/main.cpp)
 add_executable(TriggerAVT
 ${CMAKE_SOURCE_DIR}/TriggerAVT/main.cpp 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(Boost_USE_STATIC_LIBS OFF)
-set(TriggerAVT_tests_src ${CMAKE_SOURCE_DIR}/TriggerAVT_tests)
+set(TriggerAVT_tests_src ${CMAKE_SOURCE_DIR}/Boost_tests/TriggerAVT_tests)
 
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 include_directories(${Boost_INCLUDE_DIRS})

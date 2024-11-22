@@ -1,3 +1,5 @@
-#define BOOT_TEST_MODULE mcu trigger signal tests
 #define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
+
+int main(int argc, char* argv[]); 
